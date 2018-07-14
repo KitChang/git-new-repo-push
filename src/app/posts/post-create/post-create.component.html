@@ -1,0 +1,19 @@
+<h2>The Post Create Comp</h2>
+<mat-card>
+  <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+    <mat-form-field>
+        <input matInput type="text" name="title" ngModel required #title="ngModel">
+        <mat-error *ngIf="title.invalid">Please fill in blanks</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput rows="10" name="content" ngModel required #content="ngModel"></textarea>
+        <mat-error *ngIf="content.invalid">Please fill in blanks</mat-error>
+      </mat-form-field>
+    <button mat-raised-button color="accent" type="submit">Save Post</button>
+  </form>
+
+</mat-card>
+
+<br>
+
+<p>{{newPost}}</p>
