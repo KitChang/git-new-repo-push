@@ -1,0 +1,17 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion multi="true" *ngIf="requests.length > 0 && !isLoading">
+  <mat-expansion-panel *ngFor="let request of requests">
+    <mat-expansion-panel-header>
+      {{ request.title }}
+    </mat-expansion-panel-header>
+    <p>{{ request.content }}</p>
+    <mat-action-row *ngIf="userIsAuthenticated && userId === request.creator">
+      <a mat-button color="primary" [routerLink]="['/edit', request.id]">EDIT</a>
+      <button mat-button color="warn" (click)="onDelete(request.id)">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<mat-paginator [length]="totalRequests" [pageSize]="requestsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+  *ngIf="requests.length > 0"></mat-paginator>
+<p class="info-text mat-body-1" *ngIf="requests.length <= 0 && !isLoading">No requests added yet!</p>
+

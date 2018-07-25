@@ -1,0 +1,14 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion multi="true" *ngIf="users.length > 0 && !isLoading">
+  <mat-expansion-panel *ngFor="let user of users">
+    <mat-expansion-panel-header>
+      {{ user.email }}
+    </mat-expansion-panel-header>
+    <mat-action-row *ngIf="userIsAuthenticated">
+      <button mat-button color="warn" (click)="onDelete(user.id)">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<mat-paginator [length]="totalItems" [pageSize]="itemsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+  *ngIf="users.length > 0"></mat-paginator>
+<p class="info-text mat-body-1" *ngIf="users.length <= 0 && !isLoading">No users added yet!</p>

@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form [formGroup]="form" (submit)="onSaveRequest()" *ngIf="!isLoading">
+    <mat-form-field>
+      <input matInput type="text" formControlName="title" placeholder="Request Title">
+      <mat-error *ngIf="form.get('title').invalid">Please enter a request title.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput rows="4" formControlName="content" placeholder="Request Content"></textarea>
+      <mat-error *ngIf="form.get('content').invalid">Please enter a request title.</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="submit">Save Request</button>
+  </form>
+</mat-card>
