@@ -1,0 +1,29 @@
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+mat-paginator {
+  margin-top: 1rem;
+}
+
+.info-text {
+  text-align: center;
+}
+
+.product-image {
+  width: 100%;
+}
+
+.product-image img {
+  width: 100%;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+a {
+  margin: 16px 16px;
+}

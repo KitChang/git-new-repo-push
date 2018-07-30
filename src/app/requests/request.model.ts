@@ -1,6 +1,15 @@
 export interface Request {
   id: string;
-  title: string;
-  content: string;
+  transactionId: string;
+  customer: string;
   creator: string;
+  follower: string;
+  products: [{
+    product: string,
+    qty: number,
+    isOrdered: boolean,
+    orderedQty: number,
+    isRevoke: boolean
+  }];
+  isRevoke: boolean;
 }

@@ -1,0 +1,32 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<a mat-raised-button color="primary" [routerLink]="['create']" routerLinkActive="mat-accent">+ Add Product</a>
+<mat-accordion multi="true" *ngIf="products.length > 0 && !isLoading">
+  <mat-expansion-panel *ngFor="let product of products">
+    <mat-expansion-panel-header>
+      {{ product.royalexId }}
+    </mat-expansion-panel-header>
+    <div class="product-image">
+      <img [src]="product.imagePath" [alt]="product.royalexId">
+    </div>
+    <p>{{ product.name }}</p>
+    <mat-action-row *ngIf="userIsAuthenticated">
+      <a mat-button color="primary" [routerLink]="['edit', product.id]">EDIT</a>
+      <button mat-button color="warn" (click)="onDelete(product.id)">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<mat-paginator [length]="totalProducts" [pageSize]="productsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+  *ngIf="products.length > 0"></mat-paginator>
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+  <ng-container matColumnDef="royalexId">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.royalexId }} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<p class="info-text mat-body-1" *ngIf="products.length <= 0 && !isLoading">No products added yet!</p>

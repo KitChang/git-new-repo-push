@@ -27,10 +27,11 @@ export class RequestsService {
           return {
             requests: requestData.requests.map(request => {
               return {
-                title: request.title,
-                content: request.content,
+                transactionId: request.transactionId,
+                customer: request.customer,
                 id: request._id,
-                creator: request.creator
+                creator: request.creator,
+                follower: request.follower
               };
             }),
             maxRequests: requestData.maxRequests
@@ -54,18 +55,22 @@ export class RequestsService {
     console.log('getRequest');
     return this.http.get<{
       _id: string;
-      title: string;
-      content: string;
+      transactionId: string;
+      customer: string;
       creator: string;
+      follower: string;
+      products: [any];
+      isRevoke: boolean;
     }>(BACKEND_URL + id);
   }
 
-  addRequest(title: string, content: string) {
+  addRequest(transactionId: string, customer: string, follower: string) {
     const requestData = {
-      title: title,
-      content: content
+      transactionId: transactionId,
+      customer: customer,
+      follower: follower
     };
-    console.log(requestData);
+
     this.http
       .post<{ message: string; request: Request }>(
         BACKEND_URL,
@@ -76,13 +81,17 @@ export class RequestsService {
       });
   }
 
-  updateRequest(id: string, title: string, content: string) {
+  updateRequest(id: string, transactionId: string, customer: string, follower: string,
+    products: [any]) {
     let requestData: Request;
     requestData = {
       id: id,
-      title: title,
-      content: content,
-      creator: null
+      transactionId: transactionId,
+      customer: customer,
+      creator: null,
+      follower: follower,
+      products: products,
+      isRevoke: null
     };
 
     this.http

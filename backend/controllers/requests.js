@@ -3,14 +3,15 @@ const Request = require("../models/request");
 exports.createRequest = (req, res, next) => {
   const url = req.protocol + "://" + req.get("host");
   const request = new Request({
-    title: req.body.title,
-    content: req.body.content,
-    creator: req.userData.userId
+    transactionId: req.body.transactionId,
+    customer: req.body.customer,
+    creator: req.userData.userId,
+    follower: req.body.follower
   });
-  console.log(req.body);
   request
     .save()
     .then(createdRequest => {
+      console.log(createdRequest);
       res.status(201).json({
         message: "Request added successfully",
         request: {
@@ -20,6 +21,7 @@ exports.createRequest = (req, res, next) => {
       });
     })
     .catch(error => {
+      console.log(error);
       res.status(500).json({
         message: "Creating a request failed!"
       });
@@ -29,8 +31,8 @@ exports.createRequest = (req, res, next) => {
 exports.updateRequest = (req, res, next) => {
   const request = new Request({
     _id: req.body.id,
-    title: req.body.title,
-    content: req.body.content,
+    transactionId: req.body.transactionId,
+    customer: req.body.customer,
     creator: req.userData.userId
   });
   Request.updateOne({ _id: req.params.id, creator: req.userData.userId }, request)

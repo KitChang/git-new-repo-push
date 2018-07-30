@@ -11,8 +11,9 @@ const routes: Routes = [
   { path: '', component: RequestListComponent },
   { path: 'create', component: RequestCreateComponent, canActivate: [AuthGuard] },
   { path: 'edit/:id', component: RequestCreateComponent, canActivate: [AuthGuard] },
-  { path: 'auth', loadChildren: './auth/auth.module#AuthModule'},
-  { path: 'users', component: UserListComponent }
+  { path: 'auth', loadChildren: './auth/auth.module#AuthModule' },
+  { path: 'users', component: UserListComponent },
+  { path: 'products', loadChildren: './products/products.module#ProductsModule' }
 ];
 
 @NgModule({

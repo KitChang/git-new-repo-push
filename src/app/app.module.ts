@@ -13,6 +13,7 @@ import { AngularMaterialModule } from './angular-material.module';
 import { PostsModule } from './posts/posts.module';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { RequestsModule } from './requests/requests.module';
+import { ProductsModule } from './products/products.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { RequestsModule } from './requests/requests.module';
     HttpClientModule,
     AngularMaterialModule,
     PostsModule,
-    RequestsModule
+    RequestsModule,
+    ProductsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

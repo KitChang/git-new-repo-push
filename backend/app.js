@@ -7,6 +7,7 @@ const postsRoutes = require("./routes/posts");
 const userRoutes = require("./routes/user");
 const usersRoutes = require("./routes/users");
 const requestsRoutes = require("./routes/requests");
+const productsRoutes = require("./routes/products");
 
 const app = express();
 
@@ -45,5 +46,6 @@ app.use("/api/posts", postsRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/requests", requestsRoutes);
+app.use("/api/products", productsRoutes);
 
 module.exports = app;

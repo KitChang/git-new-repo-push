@@ -35,10 +35,11 @@ export class RequestCreateComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       });
     this.form = new FormGroup({
-      title: new FormControl(null, {
+      transactionId: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]
       }),
-      content: new FormControl(null, { validators: [Validators.required] })
+      customer: new FormControl(null, { validators: [Validators.required] }),
+      follower: new FormControl(null, { validators: [Validators.required] })
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
@@ -50,13 +51,16 @@ export class RequestCreateComponent implements OnInit, OnDestroy {
           this.isLoading = false;
           this.request = {
             id: requestData._id,
-            title: requestData.title,
-            content: requestData.content,
-            creator: requestData.creator
+            transactionId: requestData.transactionId,
+            customer: requestData.customer,
+            creator: requestData.creator,
+            follower: requestData.follower,
+            products: requestData.products,
+            isRevoke: requestData.isRevoke
           };
           this.form.setValue({
-            title: this.request.title,
-            content: this.request.content
+            transactionId: this.request.transactionId,
+            customer: this.request.customer
           });
         });
       } else {
@@ -70,17 +74,23 @@ export class RequestCreateComponent implements OnInit, OnDestroy {
     if (this.form.invalid) {
       return;
     }
+
+    console.log(this.form.value);
+
     this.isLoading = true;
     if (this.mode === 'create') {
       this.requestsService.addRequest(
-        this.form.value.title,
-        this.form.value.content
+        this.form.value.transactionId,
+        this.form.value.customer,
+        this.form.value.follower
       );
     } else {
       this.requestsService.updateRequest(
         this.requestId,
-        this.form.value.title,
-        this.form.value.content
+        this.form.value.transactionId,
+        this.form.value.customer,
+        this.form.value.follower,
+        null
       );
     }
     this.form.reset();

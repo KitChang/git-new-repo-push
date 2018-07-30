@@ -2,12 +2,20 @@
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form [formGroup]="form" (submit)="onSaveRequest()" *ngIf="!isLoading">
     <mat-form-field>
-      <input matInput type="text" formControlName="title" placeholder="Request Title">
-      <mat-error *ngIf="form.get('title').invalid">Please enter a request title.</mat-error>
+      <input matInput type="text" formControlName="transactionId" required placeholder="Request transactionId">
+      <mat-error *ngIf="form.get('transactionId').invalid">Please enter a request transactionId.</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <textarea matInput rows="4" formControlName="content" placeholder="Request Content"></textarea>
-      <mat-error *ngIf="form.get('content').invalid">Please enter a request title.</mat-error>
+      <input matInput type="text" formControlName="customer" required placeholder="Request customer">
+      <mat-error *ngIf="form.get('customer').invalid">Please enter a request customer.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select formControlName="follower" required placeholder="Request follower">
+        <mat-option value="Kiki">Kiki</mat-option>
+        <mat-option value="Kris">Kris</mat-option>
+        <mat-option value="Funny">Funny</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('follower').invalid">Please enter a request follower.</mat-error>
     </mat-form-field>
     <button mat-raised-button color="accent" type="submit">Save Request</button>
   </form>

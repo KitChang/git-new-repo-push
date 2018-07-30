@@ -12,11 +12,6 @@ import { AuthService } from '../../auth/auth.service';
   styleUrls: ['./request-list.component.css']
 })
 export class RequestListComponent implements OnInit, OnDestroy {
-  // requests = [
-  //   { title: "First Request", content: "This is the first request's content" },
-  //   { title: "Second Request", content: "This is the second request's content" },
-  //   { title: "Third Request", content: "This is the third request's content" }
-  // ];
   requests: Request[] = [];
   isLoading = false;
   totalRequests = 0;
